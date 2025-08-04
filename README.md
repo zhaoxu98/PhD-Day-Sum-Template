@@ -6,7 +6,7 @@ This repository contains my daily summaries during my PhD journey. Each day, I d
 
 - 📝 [August 04, 2025 [Day 4]](Summary/2025-08-04.md) (60 words)
 - 📝 [August 03, 2025 [Day 3]](Summary/2025-08-03.md) (60 words)
-- 📝 [August 02, 2025 [Day 2]](Summary/2025-08-02.md) (58 words)
+- 📝 [August 02, 2025 [Day 2]](Summary/2025-08-02.md) (60 words)
 
 ## Recent Missing Summaries
 
@@ -37,7 +37,7 @@ python3 create_daily_summary.py 2025-08-01
 2. **Create for a specific date**: Run `python create_daily_summary.py 2024-01-15`
 3. **Create with start date**: Run `python create_daily_summary.py --start-date 2024-01-01`
 4. **Edit the summary**: Open the generated file in `Summary/` directory and fill in your daily progress
-5. **Automatic README updates**: The README will be automatically updated when you push changes to the Summary directory
+5. **Automatic README updates**: The README will be automatically updated when you push changes to the Summary directory, config.py, or template files
 
 ## Template Structure
 
@@ -50,4 +50,4 @@ Each daily summary includes:
 - Other records
 
 ---
-*Last updated: 2025-08-04 09:40:58*
+*Last updated: 2025-08-04 17:57:36*

@@ -48,7 +48,8 @@ def extract_current_day_counter(content):
     match = re.search(r'# Daily Summary - \d{4}-\d{2}-\d{2} \[Day (\d+)\]', content)
     if match:
         return match.group(1)
-    return None
+    # If no day counter found, return "None" to indicate missing
+    return "None"
 
 def fix_day_counter_in_file(filepath, correct_day_counter):
     """Fix the day counter in a file"""
@@ -58,12 +59,20 @@ def fix_day_counter_in_file(filepath, correct_day_counter):
         
         # Replace the title line with correct day counter
         if correct_day_counter:
-            # Pattern: # Daily Summary - YYYY-MM-DD [Day XXX]
+            # First try to replace existing day counter
             new_content = re.sub(
                 r'(# Daily Summary - \d{4}-\d{2}-\d{2}) \[Day \d+\]',
                 r'\1' + correct_day_counter,
                 content
             )
+            
+            # If no change, try to add day counter to title without one
+            if new_content == content:
+                new_content = re.sub(
+                    r'(# Daily Summary - \d{4}-\d{2}-\d{2})',
+                    r'\1' + correct_day_counter,
+                    content
+                )
         else:
             # Remove day counter if not needed
             new_content = re.sub(
