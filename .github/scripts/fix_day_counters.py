@@ -142,6 +142,8 @@ def validate_and_fix_day_counters():
     if issues_found:
         print(f"\n📊 Summary:")
         print(f"   - Files with incorrect day counters: {len(issues_found)}")
+        for issue in issues_found:
+            print(f"     - {issue['file']}: Day {issue['current']} → Day {issue['expected']}")
         print(f"   - Files fixed: {len(fixed_files)}")
         
         if fixed_files:
