@@ -146,7 +146,7 @@ def generate_missing_summaries_section(summary_files):
     content += "# For a single date\n"
     content += "python3 create_daily_summary.py YYYY-MM-DD\n\n"
     content += "# For multiple dates (example)\n"
-    for date in missing_dates[:3]:  # Show first 3 as examples
+    for date in missing_dates[-3:]:  # Show first 3 as examples
         content += f"python3 create_daily_summary.py {date}\n"
     if len(missing_dates) > 3:
         content += "# ... and so on for other missing dates\n"
