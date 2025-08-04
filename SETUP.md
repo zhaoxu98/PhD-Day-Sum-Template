@@ -7,6 +7,8 @@ This repository is set up for automated daily summary creation and README update
 - `template.md` - Template for daily summaries
 - `create_daily_summary.py` - Python script to create daily summary files
 - `create_today.sh` - Shell script for easy daily summary creation
+- `create_missing_summaries.py` - Script to create missing summary files
+- `config.py` - Configuration file for start date
 - `.github/workflows/update-readme.yml` - GitHub Actions workflow
 - `.github/scripts/update_readme.py` - Script to update README with summary links
 
@@ -22,12 +24,28 @@ python3 create_daily_summary.py
 
 # Option 3: For a specific date
 python3 create_daily_summary.py 2024-01-15
+
+# Option 4: With start date for day counting
+python3 create_daily_summary.py --start-date 2024-01-01
+./create_today.sh 2024-01-01
 ```
 
 ### 2. Edit Your Summary
 Open the generated file in the `Summary/` directory and fill in your daily progress.
 
-### 3. Commit and Push
+### 3. Create Missing Summaries (Optional)
+```bash
+# Create all missing summaries in the existing date range
+python3 create_missing_summaries.py
+
+# Create missing summaries for a specific date range
+python3 create_missing_summaries.py 2024-01-01 2024-01-31
+
+# With start date for day counting
+python3 create_missing_summaries.py --start-date-counter 2024-01-01
+```
+
+### 4. Commit and Push
 ```bash
 git add Summary/
 git commit -m "Add daily summary for 2024-01-15"
@@ -42,14 +60,21 @@ The workflow automatically triggers when:
 
 The workflow will:
 1. Update the README.md with links to all summary files
-2. Show the 10 most recent summaries
+2. Show the 10 most recent summaries with day counters (if start date is configured)
 3. Display word count for completed summaries
-4. Commit and push the updated README
+4. Show missing summaries in a collapsible section
+5. Commit and push the updated README
 
 ## Customization
 
 ### Modify Template
 Edit `template.md` to change the structure of your daily summaries.
+
+### Configure Start Date
+Edit `config.py` to set your project start date for day counting:
+```python
+START_DATE = "2024-01-01"  # Your actual start date
+```
 
 ### Change Summary Directory
 Update the paths in:
@@ -90,5 +115,6 @@ Daily summary files follow the format: `YYYY-MM-DD.md`
 The template supports these variables:
 - `{{DATE}}` - Current date (YYYY-MM-DD)
 - `{{DATETIME}}` - Current date and time (YYYY-MM-DD HH:MM:SS)
+- `{{DAY_COUNTER}}` - Day counter (e.g., " [Day 123]") if start date is configured
 
 These are automatically replaced when creating new summary files. 

@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 import argparse
 
-def create_daily_summary(date_str=None):
+def create_daily_summary(date_str=None, start_date_str=None):
     """Create a daily summary file for the specified date"""
     
     # Determine the date
@@ -23,6 +23,25 @@ def create_daily_summary(date_str=None):
             return False
     else:
         target_date = datetime.now()
+    
+    # Get start date from config if not provided
+    if not start_date_str:
+        try:
+            from config import START_DATE
+            start_date_str = START_DATE
+        except ImportError:
+            start_date_str = None
+    
+    # Calculate day counter if start date is provided
+    day_counter = ""
+    if start_date_str:
+        try:
+            start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+            days_diff = (target_date - start_date).days
+            if days_diff >= 0:
+                day_counter = f" [Day {days_diff + 1}]"
+        except ValueError:
+            print(f"Warning: Invalid start date format. Please use YYYY-MM-DD format.")
     
     # Format date for filename and content
     date_filename = target_date.strftime('%Y-%m-%d')
@@ -54,6 +73,7 @@ def create_daily_summary(date_str=None):
         # Replace placeholders
         content = content.replace('{{DATE}}', date_content)
         content = content.replace('{{DATETIME}}', datetime_content)
+        content = content.replace('{{DAY_COUNTER}}', day_counter)
         
         # Write the new file
         with open(output_path, 'w', encoding='utf-8') as f:
@@ -69,10 +89,11 @@ def create_daily_summary(date_str=None):
 def main():
     parser = argparse.ArgumentParser(description='Create daily summary file from template')
     parser.add_argument('date', nargs='?', help='Date in YYYY-MM-DD format (default: today)')
+    parser.add_argument('--start-date', help='Start date in YYYY-MM-DD format for day counting')
     
     args = parser.parse_args()
     
-    success = create_daily_summary(args.date)
+    success = create_daily_summary(args.date, args.start_date)
     sys.exit(0 if success else 1)
 
 if __name__ == '__main__':

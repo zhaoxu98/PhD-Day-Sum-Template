@@ -1,4 +1,4 @@
-# Daily Summary - {{DATE}}
+# Daily Summary - {{DATE}}{{DAY_COUNTER}}
 
 ## Today's Completed Work
 
