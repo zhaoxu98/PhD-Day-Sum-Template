@@ -66,6 +66,9 @@ git push
 
 The workflow automatically triggers when:
 - Files are pushed to the `Summary/` directory
+- `config.py` is modified (e.g., when changing START_DATE)
+- Scripts in `.github/scripts/` are updated
+- `template.md` is modified
 - Manual trigger via GitHub Actions UI
 
 The workflow will:

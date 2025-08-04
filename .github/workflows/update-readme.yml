@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'Summary/**'
+      - 'config.py'
+      - '.github/scripts/**'
+      - 'template.md'
     branches:
       - main
   workflow_dispatch:
