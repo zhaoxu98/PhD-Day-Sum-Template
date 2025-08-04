@@ -23,6 +23,10 @@ jobs:
       with:
         python-version: '3.11'
     
+    - name: Validate and fix day counters
+      run: |
+        python .github/scripts/fix_day_counters.py
+    
     - name: Update README
       run: |
         python .github/scripts/update_readme.py
@@ -31,6 +35,6 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add README.md
-        git diff --quiet && git diff --staged --quiet || git commit -m "Update README with latest daily summaries"
+        git add Summary/ README.md
+        git diff --quiet && git diff --staged --quiet || git commit -m "Update README and fix day counters"
         git push 

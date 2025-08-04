@@ -8,9 +8,11 @@ This repository is set up for automated daily summary creation and README update
 - `create_daily_summary.py` - Python script to create daily summary files
 - `create_today.sh` - Shell script for easy daily summary creation
 - `create_missing_summaries.py` - Script to create missing summary files
+- `validate_day_counters.py` - Script to validate and fix day counters
 - `config.py` - Configuration file for start date
 - `.github/workflows/update-readme.yml` - GitHub Actions workflow
 - `.github/scripts/update_readme.py` - Script to update README with summary links
+- `.github/scripts/fix_day_counters.py` - Script to fix day counters in summary files
 
 ## Quick Start
 
@@ -45,7 +47,15 @@ python3 create_missing_summaries.py 2024-01-01 2024-01-31
 python3 create_missing_summaries.py --start-date-counter 2024-01-01
 ```
 
-### 4. Commit and Push
+### 4. Validate Day Counters (Optional)
+```bash
+# Check and fix day counters manually
+python3 validate_day_counters.py
+
+# Or run the GitHub workflow which will do this automatically
+```
+
+### 5. Commit and Push
 ```bash
 git add Summary/
 git commit -m "Add daily summary for 2024-01-15"
@@ -59,11 +69,12 @@ The workflow automatically triggers when:
 - Manual trigger via GitHub Actions UI
 
 The workflow will:
-1. Update the README.md with links to all summary files
-2. Show the 10 most recent summaries with day counters (if start date is configured)
-3. Display word count for completed summaries
-4. Show missing summaries in a collapsible section
-5. Commit and push the updated README
+1. Validate and fix day counters in all summary files
+2. Update the README.md with links to all summary files
+3. Show the 10 most recent summaries with day counters (if start date is configured)
+4. Display word count for completed summaries
+5. Show missing summaries in a collapsible section
+6. Commit and push the updated README and any fixed summary files
 
 ## Customization
 
@@ -75,6 +86,8 @@ Edit `config.py` to set your project start date for day counting:
 ```python
 START_DATE = "2024-01-01"  # Your actual start date
 ```
+
+**Note**: When you change the START_DATE, the system will automatically fix day counters in all existing summary files during the next GitHub Actions run.
 
 ### Change Summary Directory
 Update the paths in:
@@ -96,6 +109,15 @@ chmod +x create_daily_summary.py create_today.sh .github/scripts/update_readme.p
 The scripts require Python 3.6+. Check your version:
 ```bash
 python3 --version
+```
+
+### Day Counter Issues
+If day counters seem incorrect after changing START_DATE:
+```bash
+# Run manual validation
+python3 validate_day_counters.py
+
+# Or wait for the next GitHub Actions run to fix automatically
 ```
 
 ### GitHub Actions Issues

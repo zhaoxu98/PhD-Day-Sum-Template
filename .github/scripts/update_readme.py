@@ -85,10 +85,31 @@ def generate_missing_summaries_section(summary_files):
     if not existing_dates:
         return ""
     
+    # Try to get start date from config
+    start_date_str = None
+    try:
+        import sys
+        sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+        from config import START_DATE
+        start_date_str = START_DATE
+    except ImportError:
+        pass
+    
     # Find the date range
     sorted_dates = sorted(existing_dates)
-    start_date = datetime.strptime(sorted_dates[0], '%Y-%m-%d')
+    range_start_date = datetime.strptime(sorted_dates[0], '%Y-%m-%d')
     end_date = datetime.strptime(sorted_dates[-1], '%Y-%m-%d')
+    
+    # If we have a configured start date, use it as the range start
+    if start_date_str:
+        try:
+            config_start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+            # Use the earlier of config start date or first summary date
+            start_date = min(config_start_date, range_start_date)
+        except ValueError:
+            start_date = range_start_date
+    else:
+        start_date = range_start_date
     
     # Generate all expected dates in the range
     expected_dates = set()

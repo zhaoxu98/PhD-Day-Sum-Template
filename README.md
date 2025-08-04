@@ -4,7 +4,32 @@ This repository contains my daily summaries during my PhD journey. Each day, I d
 
 ## Recent Summaries
 
-- 📝 [August 04, 2025 [Day 2]](Summary/2025-08-04.md) (60 words)
+- 📝 [August 04, 2025 [Day 4]](Summary/2025-08-04.md) (60 words)
+- 📝 [August 03, 2025 [Day 3]](Summary/2025-08-03.md) (60 words)
+- 📝 [August 02, 2025 [Day 2]](Summary/2025-08-02.md) (58 words)
+
+## Recent Missing Summaries
+
+<details>
+<summary>Click to expand missing summaries</summary>
+
+The following dates are missing from your daily summaries:
+
+```
+2025-08-01
+```
+
+To create missing summaries, use:
+```bash
+# For a single date
+python3 create_daily_summary.py YYYY-MM-DD
+
+# For multiple dates (example)
+python3 create_daily_summary.py 2025-08-01
+```
+
+</details>
+
 
 ## How to Use
 
@@ -25,4 +50,4 @@ Each daily summary includes:
 - Other records
 
 ---
-*Last updated: 2025-08-04 09:04:32*
+*Last updated: 2025-08-04 17:22:22*
