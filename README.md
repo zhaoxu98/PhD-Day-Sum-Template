@@ -4,10 +4,7 @@ This repository contains my daily summaries during my PhD journey. Each day, I d
 
 ## Recent Summaries
 
-- 📝 [August 07, 2025 [Day 585]](Summary/2025-08-07.md) (60 words)
-- 📝 [August 06, 2025 [Day 584]](Summary/2025-08-06.md) (60 words)
-- 📝 [August 05, 2025 [Day 583]](Summary/2025-08-05.md) (60 words)
-- 📝 [August 04, 2025 [Day 582]](Summary/2025-08-04.md) (58 words)
+- 📝 [August 04, 2025 [Day 2]](Summary/2025-08-04.md) (60 words)
 
 ## How to Use
 
@@ -28,4 +25,4 @@ Each daily summary includes:
 - Other records
 
 ---
-*Last updated: 2025-08-04 16:52:20*
+*Last updated: 2025-08-04 09:04:32*
